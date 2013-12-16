@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
 </head>
+  <base href="/">
   <body ng-app="soloApp">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -33,11 +34,11 @@
             <a class="navbar-brand" ng-href="../">Blogmark</a>
           </div>
           <ul class="nav navbar-nav navbar">
-            <li><a ng-href="/about">About</a></li>
-            <li><a ng-href="#">Contact</a></li>
+            <li><a ng-href="/bookmarks">View Your Bookmarks</a></li>
+            <li><a ng-href="/blogmarks">Generate a Blog Snippet</a></li>
           </ul>
           <form class="navbar-form navbar-right">
-            <input type="text" class="form-control col-lg-8" placeholder="Search">
+            <!-- <input type="text" class="form-control col-lg-8" placeholder="Search"> -->
           </form>
         </div>
         <div ng-view>
@@ -46,34 +47,20 @@
 
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src='https://cdn.firebase.com/v0/firebase.js'></script>
-    <script src='https://cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js'></script>
 
-<!--    
-        <script src="bower_components/sass-bootstrap/js/affix.js"></script>
-        <script src="bower_components/sass-bootstrap/js/alert.js"></script>
-        <script src="bower_components/sass-bootstrap/js/button.js"></script>
-        <script src="bower_components/sass-bootstrap/js/carousel.js"></script>
-        <script src="bower_components/sass-bootstrap/js/transition.js"></script>
-        <script src="bower_components/sass-bootstrap/js/collapse.js"></script>
-        <script src="bower_components/sass-bootstrap/js/dropdown.js"></script>
-        <script src="bower_components/sass-bootstrap/js/modal.js"></script>
-        <script src="bower_components/sass-bootstrap/js/scrollspy.js"></script>
-        <script src="bower_components/sass-bootstrap/js/tab.js"></script>
-        <script src="bower_components/sass-bootstrap/js/tooltip.js"></script>
-        <script src="bower_components/sass-bootstrap/js/popover.js"></script>
-         -->
+    <!-- build:js scripts/modules.js -->
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <!-- endbuild -->
 
-        <!-- build:js scripts/modules.js -->
-        <script src="bower_components/angular-resource/angular-resource.js"></script>
-        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-        <script src="bower_components/angular-route/angular-route.js"></script>
-        <!-- endbuild -->
-
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/services.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/bookmark.js"></script>
+    <script src="scripts/controllers/blogmark.js"></script>
+    <!-- endbuild -->
 </body>
 </html>

@@ -4,8 +4,7 @@ angular.module('soloApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute',
-  'firebase'
+  'ngRoute'
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
@@ -13,9 +12,13 @@ angular.module('soloApp', [
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/about', {
-        template: '<h2>About</h2>',
-        controller: ''
+      .when('/bookmarks', {
+        templateUrl: 'views/bookmark.html',
+        controller: 'BookmarkCtrl'
+      })
+      .when('/blogmarks', {
+        templateUrl: 'views/blogmark.html',
+        controller: 'BlogmarkCtrl'
       })
       .otherwise({
         redirectTo: '/'
