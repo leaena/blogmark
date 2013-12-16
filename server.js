@@ -1,4 +1,5 @@
 var express = require('express');
+var http = require('http');
 var cors = require('cors');
 var Firebase = require('firebase');
 var Users = new Firebase('https://leaena.firebaseio.com/users');
@@ -24,7 +25,6 @@ var websiteUnique = function(url){
 var updateCount = function(){
   countRef.transaction(function(current_value) {
     id = current_value + 1;
-    console.log(id);
     return id;
   });
 };
@@ -49,12 +49,25 @@ app.get('/websites', function(req, res){
 });
 
 app.post('/websites', function(req, res){
-    var url = req.body.url;
-    if(websiteUnique(url)){
-      Websites.child(id).set({URL: url});
-      updateCount();
-    }
-    res.redirect('/');
+  var url = req.body.url;
+  var data = '';
+  http.get(url, function(res) {
+    res.on('data', function(chunk){
+      data += chunk;
+    });
+    console.log("data: ", data);
+    res.on("end", function () {
+      console.log(data);
+    });
+  }).on('error', function(e) {
+    console.log("Got error: " + e.message);
+  });
+
+  if(websiteUnique(url)){
+    Websites.child(id).set({URL: url});
+    updateCount();
+  }
+  res.redirect('/');
 });
 
 app.use(function(req, res) {
