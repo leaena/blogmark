@@ -40,7 +40,9 @@ app.get('/websites', function(req, res){
     var JSON = snapshot.val();
     var result = [];
     for (var i = 0; i < id; i++){
-      result.push(JSON[i]);
+      obj = JSON[i];
+      obj['ID'] = i;
+      result.push(obj);
     }
     res.json(JSON);
   });

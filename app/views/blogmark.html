@@ -1,13 +1,11 @@
-<div class="" ng-Repeat="website in websites">
-  <a ng-href="{{ website.URL }}">{{ website.URL }}</a>
-</div>
-<button >Submit</button>
-<p> &nbsp; </p> 
-<div ng-show="submitted" class="panel panel-success">
+<div ng-select="marks" select-class="{active: $optSelected}" select-multiple>
+  <p ng-repeat="website in websites" ng-select-option="{{ website.URL }}">{{ website.URL }}</p>
+</div> 
+
+<div  class="panel panel-success">
 <div class="panel-heading">
   <h3 class="panel-title">View Your HTML</h3>
 </div>
 <div class="panel-body">
-  Panel content
-</div>
+  <pre><p ng-repeat="mark in marks">&lt;a href="{{ mark }}"&gt; {{ mark }} &lt;/a&gt;</p></pre>
 </div>

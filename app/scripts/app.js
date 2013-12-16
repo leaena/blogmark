@@ -4,7 +4,8 @@ angular.module('soloApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'ngSelect'
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider
