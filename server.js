@@ -25,7 +25,6 @@ var websiteUnique = function(url){
 var postWebsite = function(url, res){
   var title, text;
   jsdom.env(url, ["http://code.jquery.com/jquery.js"], function (errors, window) {
-    console.log(errors);
     title = window.$("title").text();
     text = window.$('body').text();
     if(websiteUnique(url)){
@@ -37,7 +36,6 @@ var postWebsite = function(url, res){
         res.redirect('/');
       });
     }
-    
   });
 };
 
@@ -49,7 +47,7 @@ app.use(cors());
 app.use(app.router);
 
 app.get('/websites', function(req, res){
-  Websites.on('value', function(snapshot) {
+  Websites.once('value', function(snapshot) {
     var JSON = snapshot.val();
     res.json(JSON);
   });
@@ -73,16 +71,12 @@ app.post('/update', function(req, res){
   Websites.child(ID).update({category: category, TITLE: title});
   res.redirect('/bookmarks');
 });
-  
-  
-
-// app.post('/login', function(req, res){
-//   var data = '';
-//   req.on('data', function(chunk){
-//     data += chunk;
-//   });
-//   console.log("data: ", data);
-// });
+app.post('/remove', function(req, res){
+  var ID = req.body.user_id;
+  Websites.child(ID).remove(function(){
+    res.redirect('/bookmarks');
+  });
+});
 
 app.use(function(req, res) {
     res.sendfile(__dirname + '/app/index.html');

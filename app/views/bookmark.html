@@ -6,14 +6,13 @@ Notes search: &nbsp; &nbsp; &nbsp; <input ng-model="noted" type="search" placeho
 <h4>To Blog:</h4>
 <div class="well well-sm">
   <span>&nbsp;</span><span ng-Repeat="select in $root.selected"> 
-    <span class="label label-success" ng-click="remove(select)">{{select.URL}}</span> &nbsp;</span>
+    <span class="label label-success">{{select.URL}} <span style="cursor: pointer;" ng-click="remove(select)">x</span></span> &nbsp;</span>
 </div>
-<div class="list-group" ng-Repeat="website in websites | filter:{TEXT: text, notes: noted, category:blah} track by $index">
+<div class="list-group" ng-Repeat="website in websites | filter:{TEXT: text, notes: noted, category:blah}">
   <div class="list-group-item">
   <div>
   <div style="float:right;">
-    <span class="btn btn-muted btn-sm" ng-click="add(website)">+</span>
-    <span class="btn btn-muted btn-sm" ng-click="remove(website)">-</span>
+    <span class="label label-danger" style="cursor: pointer;" ng-click="add(website)">+</span>
   </div>
   <img style="margin:0 1em 1em 0" src="http://api.webthumbnail.org/?width=150&height=100&url={{ website.URL }}" />
   <a ng-href="{{ website.URL }}">{{ website.TITLE | limitTo:50}}</a>

@@ -5,8 +5,6 @@
 <h3>{{ website.URL }}</h3>
 <p>&nbsp;</p>
 
-
-
 <form action="/update" method="post">
   <h4>Edit title:</h4>
   <textarea name="title" rows="3" cols="50">{{ website.TITLE }}</textarea><br />
@@ -16,5 +14,11 @@
   <br/>
   <input class="btn btn-sm btn-primary" type="submit" value="Submit"></input>
 </form>
+<p> &nbsp;</p>
+<form action="/remove" method="post">
+  <input class="form-control" type="hidden" name="user_id" value="{{ params.id }}" />
+  <input class="btn btn-sm btn-danger" type="submit" value="Delete Bookmark"></input>
+</form>
+</br>
 </div>
 </div>
