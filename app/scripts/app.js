@@ -25,6 +25,10 @@ angular.module('soloApp', [
         templateUrl: 'views/notes.html',
         controller: 'NotesCtrl'
       })
+      .when('/update/:id', {
+        templateUrl: 'views/edit.html',
+        controller: 'EditCtrl'
+      })
       .when('/bookmarks', {
         templateUrl: 'views/bookmark.html',
         controller: 'BookmarkCtrl'

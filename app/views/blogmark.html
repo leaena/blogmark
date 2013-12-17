@@ -1,7 +1,7 @@
 <!-- <div ng-select="marks" select-class="{active: $optSelected}" select-multiple>
   <p ng-repeat="website in websites track by $index" ng-select-option="{{ website.URL }}, {{website.TITLE, {{website.notes}}">{{ website.TITLE }}</p>
 </div>  -->
-<select class="width: 200px;" ng-model="mark" ng-options="website.TITLE for website in websites">
+<select ng-model="mark" ng-options="website.TITLE | limitTo:50 group by website.category for website in websites">
   <option value="">Choose bookmark:</option>
 </select>
 <p> &nbsp;</p>

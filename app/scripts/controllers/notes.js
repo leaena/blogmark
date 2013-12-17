@@ -1,5 +1,5 @@
 angular.module('soloApp')
-.controller('NotesCtrl', function($scope, $http, $routeParams, WebsitesService) {
+.controller('NotesCtrl', function($scope, $routeParams, WebsitesService) {
   $scope.params = $routeParams;
   $scope.websites = "";
   WebsitesService.getWebsites()

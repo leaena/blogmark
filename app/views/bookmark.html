@@ -1,3 +1,9 @@
-<ul class="list-group" ng-Repeat="website in websites track by $index">
-  <li class="list-group-item"><a ng-href="{{ website.URL }}">{{ website.TITLE }}</a> <a ng-href="/notes/{{ website.ID }}">Add Notes</a> </li>
+Fulltext search: <input ng-model="text" type="search" placeholder="Text to search for..."/>
+<select class="navbar-right" ng-model="mark" ng-options="website.category | limitTo:50 website in websites">
+  <option value="">Choose category:</option>
+</select>
+<p>&nbsp;</p>
+<ul class="list-group" ng-Repeat="website in websites | filter:{TEXT: text}:{category: mark} track by $index">
+  <li class="list-group-item"><a ng-href="{{ website.URL }}">{{ website.TITLE }}</a> <a class="badge" ng-href="/update/{{ website.ID }}">Edit</a><a class="badge" ng-href="/notes/{{ website.ID }}">Notes</a>
+   </li>
 </ul>
