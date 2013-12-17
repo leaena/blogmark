@@ -19,7 +19,7 @@ angular.module('soloApp')
       var d = $q.defer();
       $http({
         method: 'POST',
-        url: '/links',
+        url: '/notes',
         data: data
       })
       .success(function(data){

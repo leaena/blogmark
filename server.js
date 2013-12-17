@@ -5,10 +5,9 @@ var jsdom = require('jsdom');
 var Firebase = require('firebase');
 var Users = new Firebase('https://leaena.firebaseio.com/users');
 var Websites = new Firebase('https://leaena.firebaseio.com/websites');
-var countRef = new Firebase('https://leaena.firebaseio.com/total_messages');
+var countRef = new Firebase('https://leaena.firebaseio.com/count');
 
 var app = express();
-var databaseID = 0;
 
 var websiteUnique = function(url){
   var unique = true;
@@ -23,25 +22,23 @@ var websiteUnique = function(url){
   return unique;
 };
 
-var updateCount = function(){
-  countRef.transaction(function(current_value) {
-    databaseID = current_value + 1;
-    return databaseID;
-  });
-};
-
-var postWebsite = function(url, req, res){
+var postWebsite = function(url, res){
   var title, text;
   jsdom.env(url, ["http://code.jquery.com/jquery.js"], function (errors, window) {
     console.log(errors);
     title = window.$("title").text();
     text = window.$('body').text();
     if(websiteUnique(url)){
-      updateCount();
-      Websites.child(databaseID-1).set({ID: databaseID-1, URL: url, TITLE: title, TEXT: text});
+      var count;
+      countRef.once('value', function(ss) {
+        count = ss.val() || 0;
+        countRef.set(count+1);
+        Websites.child(count).set({ID: count, URL: url, TITLE: title, TEXT: text});
+        res.redirect('/');
+      });
     }
-    res.redirect('/');
-    });
+    
+  });
 };
 
 app.use(express.static(__dirname + '/app'));
@@ -59,12 +56,17 @@ app.get('/websites', function(req, res){
 
 app.post('/websites', function(req, res){
   var url = req.body.url;
-  postWebsite(url, req, res);
+  postWebsite(url, res);
 });
 
-// app.post('notes', function(req, res){
-//   Websites.child(ID).child('notes'.set(notes);
-// })
+app.post('/notes', function(req, res){
+  var notes = req.body.notes;
+  var ID = req.body.user_id;
+  Websites.child(ID).child('notes').set(notes);
+  res.redirect('/bookmarks');
+});
+  
+  
 
 // app.post('/login', function(req, res){
 //   var data = '';
