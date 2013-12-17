@@ -6,17 +6,15 @@ angular.module('soloApp')
     .then(function(websites) {
       $scope.websites = websites;
     });
-    $scope.add = function(index){
+    $scope.add = function(website){
       $rootScope.selected = $rootScope.selected || [];
-      var website = $scope.websites[index];
-      if($rootScope.selected.indexOf(website.ID) === -1){
-        $rootScope.selected.push(website.ID);
+      if($rootScope.selected.indexOf(website) === -1){
+        $rootScope.selected.push(website);
       }
     };
-    $scope.remove = function(index){
+    $scope.remove = function(website){
       $rootScope.selected = $rootScope.selected || [];
-      var website = $scope.websites[index];
-      var loc = $rootScope.selected.indexOf(website.ID);
+      var loc = $rootScope.selected.indexOf(website);
       if(loc !== -1){
         $rootScope.selected.splice(loc,1);
       }

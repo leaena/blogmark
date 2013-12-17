@@ -11,8 +11,8 @@
   <h3 class="panel-title">View Your HTML</h3>
 </div>
 <div class="panel-body">
-  <pre><span ng-Repeat="select in $root.selected"><span ng-Repeat="website in websites | filter:{ID: select}"><br/>&lt;a href="{{ website.URL }}"&gt; {{ website.TITLE }} &lt;/a&gt; 
-<span ng-show="website.notes">&lt;p&gt; {{website.notes}} &lt;/p&gt;<br/></span></span></span>
+  <pre><span ng-Repeat="select in $root.selected"><br/>&lt;a href="{{ select.URL }}"&gt; {{ select.TITLE }} &lt;/a&gt; 
+<span ng-show="website.notes">&lt;p&gt; {{select.notes}} &lt;/p&gt;<br/></span></span></span>
 </pre>
 </div>
 

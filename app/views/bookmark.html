@@ -5,16 +5,15 @@ Fulltext search: &nbsp; <input ng-model="text" type="search" placeholder="Text t
 Notes search: &nbsp; &nbsp; &nbsp; <input ng-model="noted" type="search" placeholder="Notes to search for..."/>
 <h4>To Blog:</h4>
 <div class="well well-sm">
-  <span>&nbsp;</span><span ng-Repeat="select in $root.selected"> &nbsp; <span class="label label-success" ng-Repeat="website in websites | filter:{ID: select}">
-    {{website.URL}}
-  </span> &nbsp;</span>
+  <span>&nbsp;</span><span ng-Repeat="select in $root.selected"> 
+    <span class="label label-success" ng-click="remove(select)">{{select.URL}}</span> &nbsp;</span>
 </div>
 <div class="list-group" ng-Repeat="website in websites | filter:{TEXT: text, notes: noted, category:blah} track by $index">
   <div class="list-group-item">
   <div>
   <div style="float:right;">
-    <span class="btn btn-muted btn-sm" ng-click="add($index)">+</span>
-    <span class="btn btn-muted btn-sm" ng-click="remove($index)">-</span>
+    <span class="btn btn-muted btn-sm" ng-click="add(website)">+</span>
+    <span class="btn btn-muted btn-sm" ng-click="remove(website)">-</span>
   </div>
   <img style="margin:0 1em 1em 0" src="http://api.webthumbnail.org/?width=150&height=100&url={{ website.URL }}" />
   <a ng-href="{{ website.URL }}">{{ website.TITLE | limitTo:50}}</a>
