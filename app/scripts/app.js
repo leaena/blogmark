@@ -35,7 +35,7 @@ angular.module('soloApp', [
       })
       .when('/blogmarks', {
         templateUrl: 'views/blogmark.html',
-        controller: 'BlogmarkCtrl'
+        controller: 'BookmarkCtrl'
       })
       .otherwise({
         redirectTo: '/'

@@ -1,17 +1,19 @@
 Fulltext search: &nbsp; <input ng-model="text" type="search" placeholder="Text to search for..."/>
 <div class="navbar-right">Notes search: &nbsp; <input ng-model="noted" type="search" placeholder="Notes to search for..."/></div>
-<!-- <select class="navbar-right" ng-model="mark" ng-options="for category in categories">
-{{ categories }}
-  <option value="">Choose category:</option>
-</select> -->
 <p>&nbsp;</p>
 <div class="list-group" ng-Repeat="website in websites | filter:{TEXT: text, notes: noted} track by $index">
   <div class="list-group-item">
+  <div>
+  <div style="float:right;">
+    <span class="btn btn-muted btn-sm" ng-click="add($index)">+</span>
+    <span class="btn btn-muted btn-sm" ng-click="remove($index)">-</span>
+  </div>
   <img style="margin:0 1em 1em 0" src="http://api.webthumbnail.org/?width=150&height=100&url={{ website.URL }}" />
   <a ng-href="{{ website.URL }}">{{ website.TITLE | limitTo:50}}</a>
    <ul class="pager">
     <li><a ng-href="/update/{{ website.ID }}">Edit</a></li>
     <li><a ng-href="/notes/{{ website.ID }}">Notes</a></li>
   </ul>
+  </div>
    </div>
 </div>

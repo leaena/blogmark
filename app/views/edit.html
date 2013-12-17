@@ -1,16 +1,20 @@
 <div ng-controller="EditCtrl">
 <div ng-repeat="website in websites | filter:{ID: params.id}">
+<a href="/bookmarks">< Back to all bookmarks </a>
 <h2>{{ website.TITLE}}</h2>
 <h3>{{ website.URL }}</h3>
 <p>&nbsp;</p>
-<!-- <h4>Edit title:</h4> -->
-<h4>Add or edit category:</h4>
 
-<!-- <form action="/notes" method="post">
-  <textarea name="notes" rows="5" cols="50">{{ website.notes }}</textarea><br />
+
+
+<form action="/update" method="post">
+  <h4>Edit title:</h4>
+  <textarea name="title" rows="3" cols="50">{{ website.TITLE }}</textarea><br />
+  <h4>Edit category:</h4>
+  <input name="category" type="text" value="{{ website.category }}"><br />
   <input class="form-control" type="hidden" name="user_id" value="{{ params.id }}" />
   <br/>
   <input class="btn btn-sm btn-primary" type="submit" value="Submit"></input>
-</form> -->
+</form>
 </div>
 </div>

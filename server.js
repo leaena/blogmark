@@ -62,7 +62,14 @@ app.post('/websites', function(req, res){
 app.post('/notes', function(req, res){
   var notes = req.body.notes;
   var ID = req.body.user_id;
-  Websites.child(ID).child('notes').set(notes);
+  Websites.child(ID).update({notes: notes});
+  res.redirect('/bookmarks');
+});
+app.post('/update', function(req, res){
+  var category = req.body.category;
+  var title = req.body.title;
+  var ID = req.body.user_id;
+  Websites.child(ID).update({category: category, TITLE: title});
   res.redirect('/bookmarks');
 });
   
