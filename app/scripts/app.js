@@ -5,7 +5,7 @@ angular.module('soloApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ngSelect'
+  'ui.utils'
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider

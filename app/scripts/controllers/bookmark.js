@@ -4,10 +4,6 @@ angular.module('soloApp')
   .controller('BookmarkCtrl', function ($rootScope, $scope, WebsitesService) {
     WebsitesService.getWebsites()
     .then(function(websites) {
-      // websites.forEach()
-      // if($scope.categories.indexOf(websites.category) === -1){
-      //   $scope.categories.push(websites.category);
-      // }
       $scope.websites = websites;
     });
     $scope.add = function(index){
