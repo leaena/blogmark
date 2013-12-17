@@ -8,7 +8,7 @@ var Websites = new Firebase('https://leaena.firebaseio.com/websites');
 var countRef = new Firebase('https://leaena.firebaseio.com/total_messages');
 
 var app = express();
-var id = 0;
+var databaseID = 0;
 
 var websiteUnique = function(url){
   var unique = true;
@@ -25,8 +25,8 @@ var websiteUnique = function(url){
 
 var updateCount = function(){
   countRef.transaction(function(current_value) {
-    id = current_value + 1;
-    return id;
+    databaseID = current_value + 1;
+    return databaseID;
   });
 };
 
@@ -38,7 +38,7 @@ var postWebsite = function(url, req, res){
     text = window.$('body').text();
     if(websiteUnique(url)){
       updateCount();
-      Websites.child(id-1).set({URL: url, TITLE: title, TEXT: text});   
+      Websites.child(databaseID-1).set({ID: databaseID-1, URL: url, TITLE: title, TEXT: text});
     }
     res.redirect('/');
     });
@@ -53,12 +53,6 @@ app.use(app.router);
 app.get('/websites', function(req, res){
   Websites.on('value', function(snapshot) {
     var JSON = snapshot.val();
-    var result = [];
-    for (var i = 0; i < id; i++){
-      obj = JSON[i];
-      obj['ID'] = i;
-      result.push(obj);
-    }
     res.json(JSON);
   });
 });
@@ -67,6 +61,10 @@ app.post('/websites', function(req, res){
   var url = req.body.url;
   postWebsite(url, req, res);
 });
+
+// app.post('notes', function(req, res){
+//   Websites.child(ID).child('notes'.set(notes);
+// })
 
 // app.post('/login', function(req, res){
 //   var data = '';

@@ -1,4 +1,4 @@
-<div ng-Repeat="website in websites">
-  <a ng-href="edit/{{ website.ID }}">Add Notes</a> <a ng-href="{{ website.URL }}">{{ website.TITLE }}</a>
+<div ng-Repeat="website in websites track by $index">
+  <a ng-href="/notes/{{ website.ID }}">Add Notes</a> <a ng-href="{{ website.URL }}">{{ website.TITLE }}</a>
   <!-- {{ website.TEXT }} -->
 </div>

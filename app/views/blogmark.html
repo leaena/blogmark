@@ -1,5 +1,5 @@
 <div ng-select="marks" select-class="{active: $optSelected}" select-multiple>
-  <p ng-repeat="website in websites" ng-select-option="{{ website}}">{{ website.TITLE }}</p>
+  <p ng-repeat="website in websites track by $index" ng-select-option="{{ website}}">{{ website.TITLE }}</p>
 </div> 
 
 <div  class="panel panel-success">
@@ -7,5 +7,7 @@
   <h3 class="panel-title">View Your HTML</h3>
 </div>
 <div class="panel-body">
-  <pre><p ng-repeat="mark in marks">&lt;a href="{{ mark.URL }}"&gt; {{ mark.TITLE }} &lt;/a&gt;</p></pre>
+  <pre><p ng-repeat="mark in marks">{{ JSON.parse(mark).TITLE }}</p></pre>
 </div>
+
+<!-- &lt;a href="{{ mark.URL }}"&gt; {{ mark.TITLE }} &lt;/a&gt; -->

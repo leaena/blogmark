@@ -14,6 +14,21 @@ angular.module('soloApp')
         d.reject(reason);
       })
       return d.promise;
+    },
+    addNotes: function(data){
+      var d = $q.defer();
+      $http({
+        method: 'POST',
+        url: '/links',
+        data: data
+      })
+      .success(function(data){
+        d.resolve(data);
+      })
+      .error(function(reason){
+        d.reject(reason);
+      })
+      return d.promise;
     }
   };
   return service;
