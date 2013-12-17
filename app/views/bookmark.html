@@ -1,4 +1,3 @@
-<div ng-Repeat="website in websites track by $index">
-  <a ng-href="/notes/{{ website.ID }}">Add Notes</a> <a ng-href="{{ website.URL }}">{{ website.TITLE }}</a>
-  <!-- {{ website.TEXT }} -->
-</div>
+<ul class="list-group" ng-Repeat="website in websites track by $index">
+  <li class="list-group-item"><a ng-href="{{ website.URL }}">{{ website.TITLE }}</a> <a ng-href="/notes/{{ website.ID }}">Add Notes</a> </li>
+</ul>

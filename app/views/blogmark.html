@@ -1,13 +1,16 @@
-<div ng-select="marks" select-class="{active: $optSelected}" select-multiple>
-  <p ng-repeat="website in websites track by $index" ng-select-option="{{ website}}">{{ website.TITLE }}</p>
-</div> 
-
-<div  class="panel panel-success">
+<!-- <div ng-select="marks" select-class="{active: $optSelected}" select-multiple>
+  <p ng-repeat="website in websites track by $index" ng-select-option="{{ website.URL }}, {{website.TITLE, {{website.notes}}">{{ website.TITLE }}</p>
+</div>  -->
+<select class="width: 200px;" ng-model="mark" ng-options="website.TITLE for website in websites">
+  <option value="">Choose bookmark:</option>
+</select>
+<p> &nbsp;</p>
+<div  class="panel panel-success" ng-show="mark">
 <div class="panel-heading">
   <h3 class="panel-title">View Your HTML</h3>
 </div>
 <div class="panel-body">
-  <pre><p ng-repeat="mark in marks">{{ JSON.parse(mark).TITLE }}</p></pre>
+  <pre>&lt;a href="{{ mark.URL }}"&gt; {{ mark.TITLE }} &lt;/a&gt; 
+<span ng-show="mark.notes">&lt;p&gt; {{mark.notes}} &lt;/p&gt;</span></pre>
 </div>
 
-<!-- &lt;a href="{{ mark.URL }}"&gt; {{ mark.TITLE }} &lt;/a&gt; -->

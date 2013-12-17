@@ -5,8 +5,8 @@
 <h4>Add or edit notes:</h4>
 
 <form action="/notes" method="post">
-  <textarea name="notes">{{ website.notes }}</textarea><br />
-  <input type="hidden" name="user_id" value="{{ params.id }}" />
+  <textarea name="notes" rows="5" cols="50">{{ website.notes }}</textarea><br />
+  <input class="form-control" type="hidden" name="user_id" value="{{ params.id }}" />
   <br/>
   <input class="btn btn-sm btn-primary" type="submit" value="Submit"></input>
 </form>
