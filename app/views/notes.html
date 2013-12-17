@@ -1,6 +1,7 @@
 <div ng-controller="NotesCtrl">
 <div ng-repeat="website in websites | filter:{ID: params.id}">
-<h2>{{ website.TITLE}} - {{ website.URL }}</h2>
+<h2>{{ website.TITLE}}</h2>
+<h3>{{ website.URL }}</h3>
 <p>&nbsp;</p>
 <h4>Add or edit notes:</h4>
 
@@ -9,6 +10,8 @@
   <input class="form-control" type="hidden" name="user_id" value="{{ params.id }}" />
   <br/>
   <input class="btn btn-sm btn-primary" type="submit" value="Submit"></input>
+  <button class="btn btn-sm btn-default" disabled>Back</button>
 </form>
+
 </div>
 </div>
