@@ -32,8 +32,8 @@ angular.module('soloApp')
       var d = $q.defer();
       $http({
         method: 'post',
-        url: '/api/login',
-        params: {
+        url: '/login',
+        data: {
           username: username,
           password: password
         }

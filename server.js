@@ -1,6 +1,7 @@
 var express = require('express');
 var http = require('http');
 var cors = require('cors');
+var jsdom = require('jsdom');
 var Firebase = require('firebase');
 var Users = new Firebase('https://leaena.firebaseio.com/users');
 var Websites = new Firebase('https://leaena.firebaseio.com/websites');
@@ -29,6 +30,20 @@ var updateCount = function(){
   });
 };
 
+var postWebsite = function(url, req, res){
+  var title, text;
+  jsdom.env(url, ["http://code.jquery.com/jquery.js"], function (errors, window) {
+    console.log(errors);
+    title = window.$("title").text();
+    text = window.$('body').text();
+    if(websiteUnique(url)){
+      updateCount();
+      Websites.child(id-1).set({URL: url, TITLE: title, TEXT: text});   
+    }
+    res.redirect('/');
+    });
+};
+
 app.use(express.static(__dirname + '/app'));
 app.use(express.bodyParser());
 
@@ -50,25 +65,16 @@ app.get('/websites', function(req, res){
 
 app.post('/websites', function(req, res){
   var url = req.body.url;
-  var data = '';
-  http.get(url, function(res) {
-    res.on('data', function(chunk){
-      data += chunk;
-    });
-    console.log("data: ", data);
-    res.on("end", function () {
-      console.log(data);
-    });
-  }).on('error', function(e) {
-    console.log("Got error: " + e.message);
-  });
-
-  if(websiteUnique(url)){
-    Websites.child(id).set({URL: url});
-    updateCount();
-  }
-  res.redirect('/');
+  postWebsite(url, req, res);
 });
+
+// app.post('/login', function(req, res){
+//   var data = '';
+//   req.on('data', function(chunk){
+//     data += chunk;
+//   });
+//   console.log("data: ", data);
+// });
 
 app.use(function(req, res) {
     res.sendfile(__dirname + '/app/index.html');
