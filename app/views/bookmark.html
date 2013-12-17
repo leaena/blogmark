@@ -1,9 +1,11 @@
-Fulltext search: <input ng-model="text" type="search" placeholder="Text to search for..."/>
-<select class="navbar-right" ng-model="mark" ng-options="website.category | limitTo:50 website in websites">
+Fulltext search: &nbsp; <input ng-model="text" type="search" placeholder="Text to search for..."/>
+<div class="navbar-right">Notes search: &nbsp;  <input ng-model="noted" type="search" placeholder="Notes to search for..."/></div>
+<!-- <select class="navbar-right" ng-model="mark" ng-options="for category in categories">
+{{ categories }}
   <option value="">Choose category:</option>
-</select>
+</select> -->
 <p>&nbsp;</p>
-<ul class="list-group" ng-Repeat="website in websites | filter:{TEXT: text}:{category: mark} track by $index">
-  <li class="list-group-item"><a ng-href="{{ website.URL }}">{{ website.TITLE }}</a> <a class="badge" ng-href="/update/{{ website.ID }}">Edit</a><a class="badge" ng-href="/notes/{{ website.ID }}">Notes</a>
-   </li>
-</ul>
+<div class="list-group" ng-Repeat="website in websites | filter:{TEXT: text, notes: noted} track by $index">
+  <div class="list-group-item"><img style="margin:0 1em 1em 0" src="http://api.webthumbnail.org/?width=150&height=100&url={{ website.URL }}" /><a ng-href="{{ website.URL }}">{{ website.TITLE | limitTo:50}}</a> <a class="badge" ng-href="/update/{{ website.ID }}">Edit</a><a class="badge" ng-href="/notes/{{ website.ID }}">Notes</a>
+   </div>
+</div>

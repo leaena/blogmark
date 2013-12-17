@@ -33,7 +33,7 @@ var postWebsite = function(url, res){
       countRef.once('value', function(ss) {
         count = ss.val() || 0;
         countRef.set(count+1);
-        Websites.child(count).set({ID: count, URL: url, TITLE: title, TEXT: text});
+        Websites.child(count).set({ID: count, URL: url, TITLE: title, TEXT: text, notes: "", category: 'default'});
         res.redirect('/');
       });
     }
