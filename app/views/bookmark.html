@@ -1,14 +1,14 @@
 Fulltext search: &nbsp; <input ng-model="text" type="search" placeholder="Text to search for..."/>
 <select ng-model="blah" ng-options="website.category as website.category for website in websites | unique:'category'">
   <option value="">Category filter:</option>
-</select> &nbsp; <button class="btn-xs btn-default"ng-show="blah" ng-click="blah=''">Clear Category</button><br/>
+</select> &nbsp; <button class="btn-xs btn-default"ng-show="blah" ng-click="blah=''">Clear Category</button><br/><br/>
 Notes search: &nbsp; &nbsp; &nbsp; <input ng-model="noted" type="search" placeholder="Notes to search for..."/>
 <h4>To Blog:</h4>
 <div class="well well-sm">
   <span>&nbsp;</span><span ng-Repeat="select in $root.selected"> 
-    <span class="label label-success">{{select.URL}} <span style="cursor: pointer;" ng-click="remove(select)">x</span></span> &nbsp;</span>
+    <span class="label label-success">{{select.URL | limitTo:50}} <span style="cursor: pointer;" ng-click="remove(select)">x</span></span> &nbsp;</span>
 </div>
-<div class="list-group" ng-Repeat="website in websites | filter:{TEXT: text, notes: noted, category:blah}">
+<div class="list-group" ng-Repeat="website in websites | orderBy:'-ID' | filter:{TEXT: text, notes: noted, category:blah}">
   <div class="list-group-item">
   <div>
   <div style="float:right;">
