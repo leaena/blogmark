@@ -2,6 +2,7 @@ var express = require('express');
 var http = require('http');
 var cors = require('cors');
 var jsdom = require('jsdom');
+var bcrypt = require("./bCrypt")
 var Firebase = require('firebase');
 var Users = new Firebase('https://leaena.firebaseio.com/users');
 var Websites = new Firebase('https://leaena.firebaseio.com/websites');
@@ -81,19 +82,22 @@ app.post('/api/login', function(req, res){
   var username = req.body.username;
   var password = req.body.password;
   Users.child(username).once('value', function(snapshot) {
-    if(password === snapshot.val().password){
+    if (snapshot.val() === null) {
+      res.status(404).send('Username does not exist.');
+    } else if(bcrypt.compareSync(password, snapshot.val().password)){
       res.send({msg:'success'});
     } else{
-      res.status(404).send('Not found');
+      res.status(404).send('Wrong password');
     }
   });
 });
 app.post('/api/signup', function(req, res){
   var username = req.body.username;
   var password = req.body.password;
+  var hash = bcrypt.hashSync(password);
   Users.child(username).once('value', function(snapshot) {
    if (snapshot.val() === null) {
-       Users.child(username).set({password: password});
+       Users.child(username).set({password: hash});
        res.send({msg:'success'});
    } else {
        res.status(404).send('User exists');
