@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('soloApp')
-  .controller('BookmarkCtrl', function ($rootScope, $scope, WebsitesService) {
+  .controller('BookmarkCtrl', function ($rootScope, $scope, WebsitesService, Session) {
     $scope.websites = "";
     WebsitesService.getWebsites()
     .then(function(websites) {
@@ -20,4 +20,7 @@ angular.module('soloApp')
         $rootScope.selected.splice(loc,1);
       }
     };
+    $scope.logout = function(){
+      Session.logout();
+    }
   });

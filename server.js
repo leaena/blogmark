@@ -39,10 +39,9 @@ var postWebsite = function(url, res){
   });
 };
 
-
+  
 app.use(express.static(__dirname + '/app'));
 app.use(express.bodyParser());
-
 app.use(cors());
 app.use(app.router);
 
@@ -75,6 +74,30 @@ app.post('/remove', function(req, res){
   var ID = req.body.user_id;
   Websites.child(ID).remove(function(){
     res.redirect('/bookmarks');
+  });
+});
+app.post('/api/login', function(req, res){
+  console.log()
+  var username = req.body.username;
+  var password = req.body.password;
+  Users.child(username).once('value', function(snapshot) {
+    if(password === snapshot.val().password){
+      res.send({msg:'success'});
+    } else{
+      res.status(404).send('Not found');
+    }
+  });
+});
+app.post('/api/signup', function(req, res){
+  var username = req.body.username;
+  var password = req.body.password;
+  Users.child(username).once('value', function(snapshot) {
+   if (snapshot.val() === null) {
+       Users.child(username).set({password: password});
+       res.send({msg:'success'});
+   } else {
+       res.status(404).send('User exists');
+   }
   });
 });
 

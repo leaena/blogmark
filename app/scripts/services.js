@@ -32,4 +32,55 @@ angular.module('soloApp')
     }
   };
   return service;
-});
+})
+.factory('Session', function($q, $http, $location, $cookieStore) {
+  var service = {
+    currentUser: null,
+    isLoggedIn: function() {
+      return !!service.currentUser;
+    },
+    setAuthenticated: function (user) {
+      $cookieStore.put('user', user);
+      service.currentUser = user;
+    },
+    logout: function(){
+      $cookieStore.remove('user');
+      service.currentUser = null;
+      $location.path('/login');
+    },
+    login: function(username, password) {
+      var d = $q.defer();
+      $http({
+        method: 'post',
+        url: '/api/login',
+        data: {
+          username: username,
+          password: password
+        }
+      }).success(function(data) {
+        d.resolve(data);
+      }).error(function(reason) {
+        d.reject(reason);
+      })
+      return d.promise;
+    },
+    signup: function(username, password) {
+      var d = $q.defer();
+      $http({
+        method: 'post',
+        url: '/api/signup',
+        data: {
+          username: username,
+          password: password
+        }
+      }).success(function(data) {
+        d.resolve(data);
+      }).error(function(reason) {
+        d.reject(reason);
+      })
+      return d.promise;
+    }
+  };
+  service.currentUser = $cookieStore.get('user');
+  return service;
+})
