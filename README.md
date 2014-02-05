@@ -7,3 +7,7 @@ Bookmarking app for easy import of links into a blog post. Features full text se
 
 Front End: Angular, Twitter Bootstrap  
 Backend: Node.js, Express, Firebase, JSDom (to scrape fulltext)
+
+##TODO:
+
+Update Firebase to actually log separate users.
